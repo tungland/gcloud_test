@@ -14,7 +14,6 @@ steps:
    - 'gcloud-test'
    - '--image'
    - 'gcr.io/jupyterhub-379311/gcloud-test:$COMMIT_SHA'
-   - '--region'
-   - 'europe-north1'
+   - '--region=europe-north1'
  images:
  - 'gcr.io/jupyterhub-379311/gcloud-test:$COMMIT_SHA'
