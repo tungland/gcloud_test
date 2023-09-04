@@ -16,9 +16,20 @@ template = """steps:
    - 'gcr.io/{project_id}/{service_name}:$COMMIT_SHA'
    - '--region'
    - '{region}'
- images:
+images:
  - 'gcr.io/{project_id}/{service_name}:$COMMIT_SHA'
 """
+
+trigger_template = """    gcloud builds triggers create github \
+    --region=REGION \
+    --repo-name=REPO_NAME \
+    --repo-owner=REPO_OWNER \
+    --branch-pattern=BRANCH_PATTERN \ # or --tag-pattern=TAG_PATTERN
+    --build-config=BUILD_CONFIG_FILE \
+    --service-account=SERVICE_ACCOUNT \
+    --require-approval
+    --include-logs-with-status"""
+
 
 def make_template(project_id, service_name, region):
     """Create a Cloud Build YAML file."""
